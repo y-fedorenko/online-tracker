@@ -197,8 +197,12 @@ h1 {
   border-radius: 10px;
 }
 
-.show {
-  visibility: visible;
+#feedback {
+  position: absolute;
+  height: 40px;
+  top: calc(50% - 20px);
+  left: calc(50%);
+  z-index: 2;
 }
 
 .btn-x {
