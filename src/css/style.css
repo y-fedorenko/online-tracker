@@ -283,7 +283,7 @@ article {
 
 .box {
   background-color: #aa1212;
-  width: 300px;
+  width: 330px;
   height: 200px;
   border-radius: 10px;
   background: linear-gradient(145deg, #aaa9a9, #f0f0f0);
@@ -310,7 +310,7 @@ article {
 }
 
 span {
-  background-color: #dddde4c0;
+  background-color: #dddde4e4;
   padding: 5px 10px;
   font-size: 14px;
   height: 26px;

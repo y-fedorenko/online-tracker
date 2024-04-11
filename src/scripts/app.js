@@ -5,7 +5,7 @@ const dialog = document.querySelector("#dialog-box");
 const buttonX = document.querySelector(".btn-x");
 
 mapboxgl.accessToken = 'pk.eyJ1IjoieWFyb3NsYXZmZWRvcmVua28iLCJhIjoiY2x1dTBjcTZ5MDRkbDJpcG85MDQzeDZmciJ9.qVQwJzOGk5_wi1vpYQv0SQ';
-let myLatitude ;
+let myLatitude;
 let myLongitude;
 
 const map = new mapboxgl.Map({
@@ -41,7 +41,7 @@ function getClientLocation() {
     setTimeout(() => {
       map.flyTo({
         center: [myLongitude, myLatitude],
-        zoom: 18,
+        zoom: 17,
         essential: true
       });
     }, 300);
@@ -60,11 +60,12 @@ function getClientLocation() {
 function dialogClosed() {
   dialog.style.visibility = 'hidden';
   map.flyTo({
-    zoom: 12, // starting zoom, makes user see some action is going on
+    zoom: 13, // starting zoom, makes user see some action is going on
     essential: true
   });
 }
 
+//This optional part of code turns on the map controls
 /* map.addControl(new mapboxgl.NavigationControl(), 'top-left');
 map.addControl(
   new mapboxgl.GeolocateControl({
@@ -97,7 +98,10 @@ window.addEventListener('keydown', (event) => {
 buttonX.addEventListener('click', dialogClosed);
 //search button
 getMyLocationButton.addEventListener('click', getClientLocation);
-
+window.addEventListener('load', () => {
+  if ('geolocation' in navigator) {
+    navigator.geolocation.getCurrentPosition(getLocation, errorHandler, {enableHighAccuracy: true})
+}});
 
 //setting some images in bulk
 const products = document.querySelectorAll('.box');
