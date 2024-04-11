@@ -8,6 +8,8 @@ const searchText = document.querySelector("input[type='text']");
 mapboxgl.accessToken = 'pk.eyJ1IjoieWFyb3NsYXZmZWRvcmVua28iLCJhIjoiY2x1dTBjcTZ5MDRkbDJpcG85MDQzeDZmciJ9.qVQwJzOGk5_wi1vpYQv0SQ';
 let myLatitude;
 let myLongitude;
+let marker;
+let popup;
 
 const map = new mapboxgl.Map({
 	container: 'map', // container ID
@@ -43,9 +45,14 @@ function errorHandler() {
         map.flyTo({ center: [myLongitude, myLatitude], zoom: 17, essential: true });
         let myPosition = [myLongitude, myLatitude];
         let inputText = `<p> Your LociTag #${searchText.value} is here! </p>`;
-        const marker = new mapboxgl.Marker({ color: "#cc273a", draggable: false }).setLngLat(myPosition).addTo(map);
-        const popup = new mapboxgl.Popup({ offset: 50, closeOnClick: false, closeButton: true })
-          .setHTML(inputText).setLngLat(myPosition).setMaxWidth(400).addTo(map);
+        if (!marker) {
+          marker = new mapboxgl.Marker({ color: "#cc273a", draggable: false }).setLngLat(myPosition).addTo(map);
+          popup = new mapboxgl.Popup({ offset: 50, closeOnClick: false, closeButton: false})
+            .setHTML(inputText).setLngLat(myPosition).setMaxWidth(400).addTo(map);
+        } else {
+          marker.setLngLat(myPosition);
+          popup.setLngLat(myPosition).setHTML(inputText);
+        }
         map.resize();
       }, errorHandler, { enableHighAccuracy: true });
     } else {
